@@ -21,9 +21,6 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Product data
   Tag.findOne({
     include: [{ model: Product, through: ProductTag }],
-    where: {
-      id: req.params.id,
-    }
   })
     .then((records) => {
       console.log("Tag - findOne", records);
@@ -50,7 +47,7 @@ router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
   Tag.update(req.body, {
     where: {
-      id: req.params.id,
+      id: req.body.id,
     },
   })
     .then((records) => {
@@ -66,7 +63,7 @@ router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
   Tag.destroy({
     where: {
-      id: req.params.id,
+      id: req.body.id,
     },
   })
     .then((records) => {

@@ -21,9 +21,6 @@ router.get("/:id", (req, res) => {
   // be sure to include its associated Products
   Category.findOne({
     include: [Product],
-    where: {
-      id: req.params.id,
-    },
   })
     .then((records) => {
       console.log("Category - getOne", records);
@@ -50,8 +47,8 @@ router.put("/:id", (req, res) => {
   // update a category by its `id` value
   Category.update(req.body, {
     where: {
-      id: req.params.id,
-    },
+      id: req.body.id,
+    }
   })
     .then((records) => {
       console.log("Category - update", records);
@@ -66,7 +63,7 @@ router.delete("/:id", (req, res) => {
   // delete a category by its `id` value
   Category.destroy({
     where: {
-      id: req.params.id,
+      id: req.body.id,
     },
   })
     .then((records) => {
